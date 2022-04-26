@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-signin',
@@ -12,11 +12,18 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm = this.fb.group({
-      username: "",
-      password: "",
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
-  Signin() {
 
+  get frm(){
+    return this.signInForm && this.signInForm.controls;
+  }
+  Signin() {
+    this.signInForm.markAllAsTouched();
+    if (this.signInForm.valid) {
+
+    }
   }
 }

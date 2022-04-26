@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpApiService } from './shared/services/http-api.service';
+import { HttpApiService } from './services/http-api.service';
 import { Apollo, gql } from 'apollo-angular';
 import { GRAPHQL_QUERY } from '../app/shared/const/graphqlQueries';
 import { map } from 'rxjs/operators';
@@ -21,6 +21,4 @@ export class AppComponent implements OnInit {
     //     console.log(data.books);
     //   })
   }
-  title = 'ang-client';
-
 }

@@ -7,6 +7,9 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { LayoutModule } from './layout/layout.module';
+import { ModalModule } from './modal/modal.module';
+
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { LayoutModule } from './layout/layout.module';
     HttpClientModule,
     LazyLoadImageModule,
     LayoutModule,
+    ModalModule,
+    StoreModule.forRoot({}),
     AppRoutingModule,
   ],
   providers: [],

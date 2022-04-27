@@ -14,6 +14,7 @@
             <div class="col-10">
                 <input class="form-control" placeholder="Enter email" formControlName="email" />
                 <app-input-error *ngIf="frm.email.touched && frm.email.errors?.required" [errorType]="'EMAIL_REQUIRED'"></app-input-error>
+                <app-input-error *ngIf="frm.email.touched && frm.email.errors?.pattern" [errorType]="'EMAIL_REQUIRED'"></app-input-error>
             </div>
 
         </div>
@@ -21,6 +22,7 @@
             <div class="col-10">
                 <input class="form-control" placeholder="Enter password" formControlName="password" type="password" />
                 <app-input-error *ngIf="frm.password.touched && frm.password.errors?.required" [errorType]="'PASSWORD_REQUIRED'"></app-input-error>
+                <app-input-error *ngIf="frm.password.touched && frm.password.errors?.pattern" [errorType]="'PASSWORD_PATTERN'"></app-input-error>
             </div>
         </div>
     </form>

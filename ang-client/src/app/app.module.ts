@@ -10,6 +10,7 @@ import { LayoutModule } from './layout/layout.module';
 import { ModalModule } from './modal/modal.module';
 
 import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { StoreModule } from '@ngrx/store';
     LazyLoadImageModule,
     LayoutModule,
     ModalModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     AppRoutingModule,
   ],
   providers: [],

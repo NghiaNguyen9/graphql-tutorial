@@ -1,4 +1,4 @@
 export const REGEX = {
     EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    PASSWORD: '',
+    PASSWORD: '[^\s]{8,15}',
 }

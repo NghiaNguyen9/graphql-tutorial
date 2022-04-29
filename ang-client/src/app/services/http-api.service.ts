@@ -2,25 +2,19 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import {Apollo} from 'apollo-angular';
-
+import { environment } from "src/environments/environment";
 @Injectable({
     providedIn: 'root'
 })
 
 export class HttpApiService {
-    constructor(private http: HttpClient,) {
-
-    }
-
-    callPostApi<R>(bodyRequest: any): Observable<R> {
-        const baseUrl = 'http://localhost:4200';
+    private baseUrl = environment.BASE_URL;
+    constructor(private http: HttpClient) { }
+    callPostApi<R>(uri: string, bodyRequest: any): Observable<R> {
         return this.http
             .post<R>(
-                baseUrl,
-                {
-                    body: bodyRequest
-                },
+                this.baseUrl + uri,
+                bodyRequest,
                 {
                     observe: 'response'
                 }

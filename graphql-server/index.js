@@ -1,6 +1,11 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
+
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+
 // load schema & resolvers
 const typeDefs = require('./schema/schema');
 const resolvers = require('./resolver/resolver');
@@ -21,6 +26,10 @@ const connectDB = async () => {
     process.exit(1);
   }
 }
+const ads = [
+  { title: 'Hello, world (again)!' }
+];
+
 connectDB();
 async function startApolloServer(typeDefs, resolvers, mongoDataMethods) {
   // Same ApolloServer initialization as before
@@ -34,12 +43,31 @@ async function startApolloServer(typeDefs, resolvers, mongoDataMethods) {
   await server.start();
 
   const app = express();
+
+  app.use(express.json());
+  // adding Helmet to enhance your API's security
+  app.use(helmet());
+  // enabling CORS for all requests
+  app.use(cors());
+
+  // adding morgan to log HTTP requests
+  app.use(morgan('combined'));
+
+  // defining an endpoint to return all ads
+  app.get('/',async (req, res) => {
+    res.send({ "title": "Hello, world (again)!"});
+  });
+  app.post('/authen/getUser',async (req, res) => {
+    debugger
+    res.send(await mongoDataMethods.getUser(req.body));
+  });
+
   server.applyMiddleware({
     app,
     // By default, apollo-server hosts its GraphQL endpoint at the
     // server root. However, *other* Apollo Server packages host it at
     // /graphql. Optionally provide this to match apollo-server.
-    path: '/'
+    // path: '/'
   });
   // Modified server startup
   await new Promise(resolve => app.listen({ port: 4000 }, resolve));

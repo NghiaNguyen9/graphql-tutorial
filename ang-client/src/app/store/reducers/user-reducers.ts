@@ -24,7 +24,7 @@ export function userReducer(state = initialState, action: userAction.Actions): U
         case userAction.ActionType.LOGOUT:
             return {
                 ...state,
-                userLogin: undefined
+                userLogin: { Email: '', Password: '' }
             }
         default:
             return state

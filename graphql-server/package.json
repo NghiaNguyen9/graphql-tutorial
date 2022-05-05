@@ -1,7 +1,7 @@
 {
   "name": "graphql-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js + MongoDB: JWT Authentication & Authorization",
   "main": "index.js",
   "scripts": {
     "server": "nodemon index",
@@ -12,11 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.6.7",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "express-graphql": "^0.12.0",
     "graphql": "^16.3.0",
     "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15"

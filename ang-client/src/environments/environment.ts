@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   graphqlUri: 'http://localhost:4200',
-  BASE_URL: 'http://localhost:4000'
+  BASE_URL: 'http://localhost:8080'
 };
 
 /*

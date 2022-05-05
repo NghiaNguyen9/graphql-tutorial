@@ -20,8 +20,8 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
-      password: ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -32,13 +32,22 @@ export class SigninComponent implements OnInit {
     this.signInForm.markAllAsTouched();
     if (this.signInForm.valid) {
       const _request = {
-        Email: this.frm.email.value,
-        Password: this.frm.password.value
+        username: this.frm.email.value,
+        password: this.frm.password.value
       };
-      this.httpSrv.callPostApi(PATH_URI.getUser, _request).subscribe(res => {
+      this.httpSrv.callPostApi(PATH_URI.signIn, _request).subscribe(res => {
         console.log(res);
       })
-      this.store.dispatch(new userAction.CheckLogin(_request))
+      // this.store.dispatch(new userAction.CheckLogin(_request))
     }
+  }
+  Test() {
+    this.httpSrv.callGetApi(PATH_URI.testUser, {}).subscribe(res => {
+      debugger
+      console.log('test user: ', res)
+    })
+    // this.httpSrv.callGetApi(PATH_URI.testMod, {}).subscribe(res => {
+    //   console.log('test mod: ', res)
+    // })
   }
 }

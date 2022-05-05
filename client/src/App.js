@@ -6,7 +6,7 @@ import Forms from './components/Forms'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'http://localhost:8080',
   cache: new InMemoryCache()
 })
 function App() {

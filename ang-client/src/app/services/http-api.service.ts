@@ -10,13 +10,18 @@ import { environment } from "src/environments/environment";
 export class HttpApiService {
     private baseUrl = environment.BASE_URL;
     constructor(private http: HttpClient) { }
-    callPostApi<R>(uri: string, bodyRequest: any): Observable<R> {
+    callPostApi(uri: string, bodyRequest: any): Observable<any> {
+        return this.http.post(this.baseUrl + uri, bodyRequest, {
+            observe: 'response'
+        })
+    }
+
+    callGetApi<R>(uri: string, bodyRequest: any): Observable<R> {
         return this.http
-            .post<R>(
+            .get<R>(
                 this.baseUrl + uri,
-                bodyRequest,
                 {
-                    observe: 'response'
+                    observe: 'response',
                 }
             )
             .pipe(

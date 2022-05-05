@@ -8,7 +8,8 @@ const morgan = require('morgan');
 const cookieSession = require("cookie-session");
 var cookieParser = require('cookie-parser');
 var corsOptions = {
-  origin: "http://localhost:4200"
+  origin: "http://localhost:4200",
+  credentials: true
 };
 const app = express();
 app.use(cors(corsOptions));

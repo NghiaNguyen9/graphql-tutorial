@@ -37,13 +37,13 @@ export class SigninComponent implements OnInit {
       };
       this.httpSrv.callPostApi(PATH_URI.signIn, _request).subscribe(res => {
         console.log(res);
+        this.activeModal.dismiss();
       })
       // this.store.dispatch(new userAction.CheckLogin(_request))
     }
   }
   Test() {
     this.httpSrv.callGetApi(PATH_URI.testUser, {}).subscribe(res => {
-      debugger
       console.log('test user: ', res)
     })
     // this.httpSrv.callGetApi(PATH_URI.testMod, {}).subscribe(res => {

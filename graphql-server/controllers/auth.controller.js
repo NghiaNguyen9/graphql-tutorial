@@ -92,9 +92,9 @@ exports.signin = (req, res) => {
                 // maxAge: 100000,
                 // signed: true
             });
-            res.cookie("refreshToken", refreshToken, {
-                httpOnly: true,
-            })
+            // res.cookie("refreshToken", refreshToken, {
+            //     httpOnly: true,
+            // })
             res.json({
                 id: user._id,
                 username: user.username,

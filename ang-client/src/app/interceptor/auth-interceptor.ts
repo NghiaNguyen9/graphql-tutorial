@@ -11,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
     constructor(private tokenSrv: TokenStorageService, private httpSrv: HttpApiService) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        req = req.clone({ headers: req.headers.append('Content-Type', 'application/json') });
+        req = req.clone({ headers: req.headers.append('Content-Type', 'application/json'), withCredentials: true });
         console.log('Request: ', req);
         return next.handle(req).pipe(
             catchError(error => {

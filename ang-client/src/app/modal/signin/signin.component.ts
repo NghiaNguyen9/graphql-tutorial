@@ -46,8 +46,8 @@ export class SigninComponent implements OnInit {
     this.httpSrv.callGetApi(PATH_URI.testUser, {}).subscribe(res => {
       console.log('test user: ', res)
     })
-    // this.httpSrv.callGetApi(PATH_URI.testMod, {}).subscribe(res => {
-    //   console.log('test mod: ', res)
-    // })
+    this.httpSrv.callGetApi(PATH_URI.testMod, {}).subscribe(res => {
+      console.log('test mod: ', res)
+    })
   }
 }

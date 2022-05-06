@@ -92,9 +92,9 @@ exports.signin = (req, res) => {
                 // maxAge: 100000,
                 // signed: true
             });
-            // res.cookie("refreshToken", refreshToken, {
-            //     httpOnly: true,
-            // })
+            res.cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+            })
             res.json({
                 id: user._id,
                 username: user.username,
@@ -114,7 +114,8 @@ exports.signout = async (req, res) => {
 };
 
 exports.refreshToken = async (req, res) => {
-    const refreshToken = req.session.refreshToken;
+    console.log('Refresh Token');
+    const refreshToken = req.cookies.refreshToken;
     if (refreshToken) {
         jwt.verify(refreshToken, config.secret, (err, decoded) => {
             if (err) {
@@ -123,8 +124,13 @@ exports.refreshToken = async (req, res) => {
             var newAccessToken = jwt.sign({ id: decoded.id }, config.secret, {
                 expiresIn: 600, // 24 hours
             });
-            req.session.token = newAccessToken;
-            res.status(200).send({
+            res.cookie("token", newAccessToken, {
+                httpOnly: true,
+                // secure: true,
+                // maxAge: 100000,
+                // signed: true
+            });
+            return res.status(200).send({
                 accessToken: newAccessToken,
                 message: "Refresh Token success"
             });

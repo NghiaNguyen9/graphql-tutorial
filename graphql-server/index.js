@@ -17,13 +17,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cookieSession({
-//     name: "bezkoder-session",
-//     secret: "COOKIE_SECRET", // should use as secret environment variable
-//     httpOnly: true
-//   })
-// );
 app.use(cookieParser());
 // routes
 require('./routes/auth.routes')(app);

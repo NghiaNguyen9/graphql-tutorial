@@ -12,8 +12,10 @@ verifyToken = (req, res, next) => {
     }
     jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {
-            if (err.name === 'TokenExpiredError')
+            if (err.name === 'TokenExpiredError') {
+                console.log('Token expired');
                 return res.status(401).send({ message: "Unauthorized! Access Token was expired!" });
+            }
             return res.status(401).send({ message: "Unauthorized!" });
         }
         req.userId = decoded.id;

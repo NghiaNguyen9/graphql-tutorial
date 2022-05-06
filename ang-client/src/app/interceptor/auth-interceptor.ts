@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler, HttpResponse } from '@angular/common/http'
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
 import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
 import { TokenStorageService } from '../services/token-storage.service';
 import { HttpApiService } from '../services/http-api.service';
+import { PATH_URI } from "../shared/const/path-uri";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -30,11 +31,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     }
     private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-        debugger
+        console.log('request refresh token: ', request.url);
         if (!this.isRefreshing) {
             this.isRefreshing = true;
             this.refreshTokenSubject.next(null);
-            this.httpSrv.callPostApi('/refreshToken', {}).pipe(
+            return from(this.httpSrv.callPostApi(PATH_URI.refreshToken, {}).pipe(
                 switchMap((token: any) => {
                     this.isRefreshing = false;
                     this.refreshTokenSubject.next(token.accessToken);
@@ -46,7 +47,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     this.tokenSrv.signOut();
                     return throwError(err);
                 })
-            );
+            ));
         }
         return this.refreshTokenSubject.pipe(
             filter(token => token !== null),
